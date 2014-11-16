@@ -99,12 +99,10 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 		rr = Math.floor(Math.random()*SIZE);
 		rc = Math.floor(Math.random()*SIZE);
 		if(map[rr][rc] === 1){
-			debugger;
 			map.spawn = {col:rr,row:rc};
 			break
 		}
 	}
-	debugger;
 	return map;
 }
 

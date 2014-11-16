@@ -64,7 +64,19 @@ Game = {
 		Crafty.e('PlayerCharacter').setChunk(s[0],s[1]);
 		document.getElementById('super').style.display='none';
 		LOADER.close();
-		setTimeout(UpdatePeriod,1000);
+		window.pauseCounter = 0;
+		$(window).keydown(function(e){
+			if (e.which == 32) {
+				if (pauseCounter%2==0) {
+					player.stop();
+				}
+				if (pauseCounter%2==1) {
+					player.queue(track.analysis.sections[player.newSectionIndex].children[player.barIndex]);
+				}
+				pauseCounter++
+			}
+		});
+		UpdatePeriod();
 	}
 };
 
@@ -100,7 +112,7 @@ Crafty.c('Chunk', {
   num: function(i) {
 	this.chunk=i;
 	return this
-  }
+  },
 });
 
 Crafty.c('Wall', {
