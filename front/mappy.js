@@ -16,9 +16,6 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 		}
 	}
 
-
-
-
 	//chunk time
 	var chunks = getChunkiness();
 	for(var ch = 1; ch < chunks+1; ch++){
@@ -33,15 +30,12 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 		}
 	}
 
-
 	var OFFSETS = {
 		'top':{row:-1,col:0},
 		'left':{row:0,col:-1},
 		'bottom':{row:1,col:0},
 		'right':{row:0,col:1}
 	};
-
-
 
 	while(needsChunking(map)){
 
@@ -71,11 +65,8 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 				}	
 			}
 		}
-
 		map = cmap;
 	}
-
-
 
 
 	for(var row = 0; row < SIZE; row++){
@@ -105,8 +96,6 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 		}
 	}
 
-
-
 	return map;
 }
 
@@ -121,8 +110,6 @@ function needsChunking(m){
 	}
 	return false;
 }
-
-
 
 function getChunkiness(){
 	return 10;

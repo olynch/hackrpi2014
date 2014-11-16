@@ -4,8 +4,25 @@
   <script src="crafty.js"></script>
   <script src="../mappy.js"></script>
   <script src="game.js"></script>
+  <style id="rate"></style>
+  <style>
+  #player {
+	  background-color:white;
+	  border-radius: 50%;
+      -webkit-border-radius: 30px;
+      height: 100%;
+      width: 100%;
+      -webkit-animation-iteration-count: infinite; 
+      opacity: 1
+  }
+  @-webkit-keyframes pulsate {
+      0% {-webkit-transform: scale(0.1, 0.1); opacity: 1.0;}
+      50% {opacity: 0.5;}
+      100% {-webkit-transform: scale(1.2, 1.2); opacity: 1.0;}
+  }
+  </style>
   <script>
-    window.addEventListener('load', Game.start);
+    window.addEventListener('load',Game.start);
   </script>
 </head>
 <body>
