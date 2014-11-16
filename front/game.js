@@ -1,4 +1,5 @@
-SIZE = 50;
+//SIZE = 50;
+SIZE = Math.floor((window.innerHeight-8)/16);
 COLORS = [
     '#FFB300', // Vivid Yellow
     '#803E75', // Strong Purple
@@ -60,9 +61,10 @@ Game = {
 			return s
 		}
 		s = randomize();
-		Crafty.e('PlayerCharacter')
-			.setChunk(s[0],s[1]);
+		Crafty.e('PlayerCharacter').setChunk(s[0],s[1]);
 		UpdatePeriod();
+		document.getElementById('super').style.display='none';
+		LOADER.close();
 	}
 };
 

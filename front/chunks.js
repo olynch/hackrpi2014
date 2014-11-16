@@ -57,15 +57,10 @@ function init() {
       });
 
       // Set up the click function
-      $(".enSong").click(function() {
-        trackID = $(this).data('enID');
-        $("#info").text('Selected ' +  $(this).data('enTitle'));
-
-        if (remixFlag == false) {
-          remixFlag = true;
-        } else {
-          $('#start-remix').removeAttr('disabled');
-        }
+      $("#start").click(function() {
+        trackID = $(".enSong").data('enID');
+        $("#info").text('Selected ' +  $(".enSong").data('enTitle'));
+		$('#start-remix').removeAttr('disabled');
       });
 
     });
