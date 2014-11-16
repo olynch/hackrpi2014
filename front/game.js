@@ -61,7 +61,6 @@ Game = {
 		}
 		s = randomize();
 		Crafty.e('PlayerCharacter')
-			.at(walls.spawn)
 			.setChunk(s[0],s[1]);
 		UpdatePeriod();
 	}
@@ -110,17 +109,13 @@ Crafty.c('Wall', {
 });
 
 Crafty.c('PlayerCharacter', {
-  at: function(c) {
-    this.attr({ x: c[0] * Game.tile, y: c[1] * Game.tile });
-	return this
-  },
   setChunk: function(x, y) {
 	  this.chunk = walls[x][y];
 	  return this;
   },
   init: function() {
     this.requires('2D, Canvas, Fourway, HTML, Collision')
-	  .attr({w:Game.tile*3/4,h:Game.tile*3/4})
+	  .attr({w:Game.tile*3/4,h:Game.tile*3/4,x:walls.spawn.col*Game.tile,y:walls.spawn.row*Game.tile})
       .fourway(4)
 	  .stopOnSolids()
 	  .replace('<div id="player"></div>');
@@ -129,6 +124,7 @@ Crafty.c('PlayerCharacter', {
   },
   checkChunks: function() {
 	  var t = this;
+	  window.foo=t;
 	  this.ticker = setTimeout(function(){t.checkChunks()},400);
 	  var newChunk = walls[Math.floor(this.x/Game.tile)][Math.floor(this.y/Game.tile)];
 	  if (newChunk==0 || (newChunk === this.chunk)) {return this}
