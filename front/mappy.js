@@ -104,7 +104,3 @@ function needsChunking(m){
 	}
 	return false;
 }
-
-function getChunkiness(){
-	return 10;
-}
