@@ -109,7 +109,7 @@ Crafty.c('PlayerCharacter', {
 	  var newChunk = walls[Math.floor(this.x/Game.tile)][Math.floor(this.y/Game.tile)];
 	  if (newChunk==0 || (newChunk === this.chunk)) {return this}
 	  this.chunk = newChunk;
-	  Inform(chunk);
+	  Inform(this.chunk);
 	  UpdatePeriod();
 	  return this
   },
@@ -126,6 +126,4 @@ Crafty.c('PlayerCharacter', {
   },
 });
 
-
-function Period(){return 0.75}
 function UpdatePeriod(){document.getElementById('rate').innerHTML="#player{-webkit-animation:pulsate "+String(Period())+"s ease-out}"}
