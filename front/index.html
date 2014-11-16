@@ -254,12 +254,53 @@ button:active,.btn:hover {
 	margin:20px auto;
 	text-align:center;
 }
+.border {
+	background-color:white;
+	-webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes pulses {
+    0% {opacity: 1.0;}
+	10% {opacity: 0.6;}
+    100% {opacity: 1.0;}
+}
+#top {
+	position:fixed;
+	top:0;
+	left:0;
+	height:6px;
+	width:105%;
+}
+#left {
+	position:fixed;
+	left:0;
+	top:0;
+	width:18px;
+	height:105%;
+}
+#right {
+	position:fixed;
+	right:0;
+	top:0;
+	width:18px;
+	height:105%;
+}
+#bottom {
+	position:fixed;
+	bottom:0;
+	left:0;
+	height:6px;
+	width:105%;
+}
   </style>
   <script>
 window.addEventListener('load',init);
   </script>
 </head>
 <body>
+	<div class="border" id="top"></div>
+	<div class="border" id="left"></div>
+	<div class="border" id="right"></div>
+	<div class="border" id="bottom"></div>
   <div id='info'> </div>
   <input type=file class='dropfile' style="display:none" onchange="upload(this.files)"/>
   <div id='super' style="margin:0 auto;text-align:center">

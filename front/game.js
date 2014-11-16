@@ -1,5 +1,5 @@
 //SIZE = 50;
-SIZE = Math.floor((window.innerHeight-8)/16);
+SIZE = Math.floor((window.innerHeight-12)/16);
 COLORS = [
     '#FFB300', // Vivid Yellow
     '#803E75', // Strong Purple
@@ -76,6 +76,7 @@ Game = {
 				pauseCounter++
 			}
 		});
+		ChangeColor(1);
 		UpdatePeriod();
 	}
 };
@@ -144,6 +145,7 @@ Crafty.c('PlayerCharacter', {
 	  if (newChunk==0 || (newChunk === this.chunk)) {return this}
 	  this.chunk = newChunk;
 	  Inform(this.chunk);
+	  ChangeColor(this.chunk);
 	  UpdatePeriod();
 	  return this
   },
@@ -160,4 +162,7 @@ Crafty.c('PlayerCharacter', {
   },
 });
 
-function UpdatePeriod(){document.getElementById('rate').innerHTML="#player{-webkit-animation:pulsate "+String(Period())+"s ease-out}"}
+function ChangeColor(chunk) {
+	$('.border').css({backgroundColor:COLORS[chunk-1]})
+}
+function UpdatePeriod(){document.getElementById('rate').innerHTML="#player{-webkit-animation:pulsate "+String(Period())+"s ease-out}.border{-webkit-animation:pulses "+String(Period())+"s ease-out}"}
