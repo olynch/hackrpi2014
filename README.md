@@ -1,5 +1,5 @@
 #Explore.mp3
-Make your way through a song by navigating a 2D maze.
+Provide a music file, and the artist & song, and we'll make an interactive playground for the user to explore different patterns and loops of the track.
 Made for HackRPI 2014 with remix.js, echonest, crafty.js, and chocolate covered espresso beans.
 
 #Description
@@ -8,3 +8,4 @@ The way music playback is handled is that at the end of each bar of music, a cal
 
 #Credit
 Explore.mp3 is (c) 2014 Owen Lynch, Lucas Morales and Akshay Thejaswi. We are also very greatful to various HackRPI mentors who saved us from bashing our heads against brick walls for most of the time.
+
