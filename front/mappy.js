@@ -43,6 +43,7 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 			for(var col = 0; col < SIZE; col++){
 				//make block, set borders on outside edges
 				cmap[row][col] = -1;	
+
 			}
 		}
 
@@ -68,7 +69,10 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 	for(var row = 0; row < SIZE; row++){
 		for(var col = 0; col < SIZE; col++){
 			//make block, set borders on outside edges
-			map[row][col] = Math.random()<BORDER_CHANCE?0:map[row][col];		
+			map[row][col] = Math.random()<BORDER_CHANCE?0:map[row][col];
+			if(row == 0 || row == SIZE-1 || col == 0 || col == SIZE-1){
+				map[row][col] = 0;
+			}		
 		}
 	}
 
