@@ -2,6 +2,8 @@
 Provide a music file, and the artist & song, and we'll make an interactive playground for the user to explore different patterns and loops of the track.
 Made for HackRPI 2014 with remix.js, echonest, crafty.js, and chocolate covered espresso beans.
 
+##[Live Example](http://lucasem.scripts.mit.edu/hack/)
+
 #Description
 Remix.js allows us to split a song file into sections that are created by the echonest api. Each section corresponds to an area on the map that is colored a certain color. 
 The way music playback is handled is that at the end of each bar of music, a callback finds the next bar based on the current area of the map the player character is in. Therefore, transitions between sections are always synced to the beat, which makes it sound smoother. Obviously it works better with electronic music.
