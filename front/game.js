@@ -62,9 +62,9 @@ Game = {
 		}
 		s = randomize();
 		Crafty.e('PlayerCharacter').setChunk(s[0],s[1]);
-		UpdatePeriod();
 		document.getElementById('super').style.display='none';
 		LOADER.close();
+		setTimeout(UpdatePeriod,1000);
 	}
 };
 

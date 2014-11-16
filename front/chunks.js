@@ -41,7 +41,7 @@ function init() {
   // Set up the search function
   var enReq = null;
   $('#searchInput').keyup(function(e) {
-	if (e.which!==13) {return}
+	if (e.which!==32) {return}
     var searchString = $('#searchInput').val();
     if (enReq) { enReq.abort(); }
     var url = 'http://developer.echonest.com/api/v4/song/search?format=json&results=5&bucket=id:7digital-US&bucket=tracks'
