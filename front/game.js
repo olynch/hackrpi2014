@@ -1,5 +1,27 @@
 SIZE = 50;
-COLORS = ['rgb(0, 128, 255)','rgb(0, 255, 128)','rgb(128, 0, 255)','rgb(128, 255, 0)','rgb(255, 0, 128)', 'rgb(255, 128, 0)','rgb(255,0,0)','rgb(0,255,0)','rgb(0,0,255)','rgb(128,128,128)'];
+COLORS = [
+    '#FFB300', // Vivid Yellow
+    '#803E75', // Strong Purple
+    '#FF6800', // Vivid Orange
+    '#A6BDD7', // Very Light Blue
+    '#C10020', // Vivid Red
+    '#CEA262', // Grayish Yellow
+    '#817066', // Medium Gray
+    '#007D34', // Vivid Green
+    '#F6768E', // Strong Purplish Pink
+    '#00538A', // Strong Blue
+    '#FF7A5C', // Strong Yellowish Pink
+    '#53377A', // Strong Violet
+    '#FF8E00', // Vivid Orange Yellow
+    '#B32851', // Strong Purplish Red
+    '#F4C800', // Vivid Greenish Yellow
+    '#7F180D', // Strong Reddish Brown
+    '#93AA00', // Vivid Yellowish Green
+    '#593315', // Deep Yellowish Brown
+    '#F13A13', // Vivid Reddish Orange
+    '#232C16', // Dark Olive Green
+];
+
 Game = {
 	// This defines our grid's size and the size of each of its tiles
 	tile: 16,
@@ -22,7 +44,6 @@ Game = {
 		// Start crafty and set a background color so that we can see it's working
 		Crafty.init(Game.width(), Game.height());
 		Crafty.background('rgb(255, 255, 255)');
- 
 		// Place a tree at every edge square on our grid of 16x16 tiles
 		for (var i=0; i<SIZE; i++)
 			for (var j=0; j<SIZE; j++)
@@ -30,13 +51,26 @@ Game = {
 						.at(i,j)
 						.num(walls[i][j])
 						.color(walls[i][j]?COLORS[walls[i][j]-1]:'rgb(0,0,0)');
-		var s;
-		while(true){
-			s = [Math.floor(Math.random()*SIZE), Math.floor(Math.random()*SIZE)];
-			if(walls[s[0]]&&(walls[s[0]][s[1]]!==null))break
+		function randomize(){
+			var s;
+			while(true){
+				s = [Math.floor(Math.random()*SIZE), Math.floor(Math.random()*SIZE)];
+				if(walls[s[0]]&&(walls[s[0]][s[1]]!==null))break
+			}
+			return s
 		}
-		Crafty.e('PlayerCharacter').at(s[0],s[1]).setChunk(s[0],s[1]);
+		s = randomize();
+		Crafty.e('PlayerCharacter')
+			.at(s[0],s[1])
+			.setChunk(s[0],s[1]);
 		UpdatePeriod();
+		window.addEventListener("keydown", function(e){
+			if (e.key==32) {
+				s = randomize();
+				window.pc.x = s[0],
+				window.pc.y = s[1];
+			}
+		});
 	}
 };
 
@@ -92,7 +126,8 @@ Crafty.c('PlayerCharacter', {
 	return this
   },
   setChunk: function(x, y) {
-  	this.chunk = walls[x][y]
+	  this.chunk = walls[x][y];
+	  return this;
   },
   init: function() {
     this.requires('2D, Canvas, Fourway, HTML, Collision')

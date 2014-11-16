@@ -10,15 +10,6 @@ var playbackIndex = -1;
 var context;
 
 function afterPlay() {
-  if (! player.oldSectionIndex) {
-    player.oldSectionIndex = 0;
-  }
-  if (! player.newSectionIndex) {
-    player.newSectionIndex = 0;
-  }
-  if (! player.barIndex) {
-    player.barIndex = 0;
-  }
   if (player.oldSectionIndex !== player.newSectionIndex) {
     console.log("sections.length: " + track.analysis.sections.length);
     if (player.newSectionIndex >= track.analysis.sections.length - 1) {
@@ -63,22 +54,25 @@ function init() {
           remixed.push(track.analysis.sections[i]);
         }
         player.addOnPlayCallback(afterPlay);
+		player.newSectionIndex = 0;
+		player.oldSectionIndex = 0;
+		player.barIndex = 0;
         player.queue(remixed[0].children[0])
         $("#info").text("Remix complete!");
+		Game.start()
       }
     });
   }
 }
 
 function getChunkiness() {
-  return track.analysis.section.length;
+  return track.analysis.sections.length;
 }
 
 function Period() {
-  return 60 / player.analysis.sections[player.newSectionIndex].tempo
+  return 60 / track.analysis.sections[player.newSectionIndex].tempo
 }
 
 function Inform(chunk) {
-  console.log("new chunk: " + chunk);
   player.newSectionIndex = chunk - 1;
 }
