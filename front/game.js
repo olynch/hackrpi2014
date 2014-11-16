@@ -1,6 +1,5 @@
 SIZE = 50;
 COLORS = ['rgb(0, 128, 255)','rgb(0, 255, 128)','rgb(128, 0, 255)','rgb(128, 255, 0)','rgb(255, 0, 128)', 'rgb(255, 128, 0)','rgb(255,0,0)','rgb(0,255,0)','rgb(0,0,255)','rgb(128,128,128)'];
-walls = generateMap(SIZE, .1, .03, 2);
 Game = {
 	// This defines our grid's size and the size of each of its tiles
 	tile: 16,
@@ -19,6 +18,7 @@ Game = {
  
 	// Initialize and start our game
 	start: function() {
+		window.walls = generateMap(SIZE, .1, .03, 2);
 		// Start crafty and set a background color so that we can see it's working
 		Crafty.init(Game.width(), Game.height());
 		Crafty.background('rgb(255, 255, 255)');

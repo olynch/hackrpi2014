@@ -79,5 +79,6 @@ function Period() {
 }
 
 function Inform(chunk) {
+  console.log("new chunk: " + chunk);
   player.newSectionIndex = chunk - 1;
 }
