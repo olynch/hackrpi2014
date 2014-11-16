@@ -1,0 +1,4 @@
+Create Game
+Procedurally generate map
+Divide song into parts
+Changing the part based on position (event trigger based on position)
