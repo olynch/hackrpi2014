@@ -70,32 +70,8 @@ function init() {
 
     });
   });
-
-
-  document.querySelector('#myfile').onchange = function(e) {
-    var files = this.files;
-    // Load the file to the fs
-    for (var i = 0, file; file = files[i]; ++i) {
-      (function(f) {
-        fs.root.getFile(f.name, {create: true, exclusive: false}, function(fileEntry) {
-          fileEntry.createWriter(function(fileWriter) {
-            fileWriter.write(f); // Note: write() can take a File or Blob object.
-          }, errorHandler);
-          // Get a URL for the file!
-          trackURL = fileEntry.toURL();
-
-          if (remixFlag == false) {
-            remixFlag = true;
-          } else {
-            $('#start-remix').removeAttr('disabled');
-          }
-
-        }, errorHandler);
-      })(file);
-    }
-
-  };
 }
+
 function startGame() {
   var contextFunction = window.webkitAudioContext || window.AudioContext;
   if (contextFunction === undefined) {
