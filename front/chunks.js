@@ -77,7 +77,6 @@ function startGame() {
     context = new contextFunction();
     remixer = createJRemixer(context, $, apiKey);
     player = remixer.getPlayer();
-	debugger;
     remixer.remixTrackById(trackID, trackURL, function(t, percent) {
       track = t;
 
@@ -108,7 +107,7 @@ function getChunkiness() {
 }
 
 function Period() {
-  return 60 / track.analysis.sections[player.newSectionIndex].tempo
+  return 60 / (track.analysis.sections[player.newSectionIndex].tempo || track.audio_summary.tempo)
 }
 
 function Inform(chunk) {
