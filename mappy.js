@@ -1,10 +1,4 @@
-
-console.log(generateMap());
-
-
-function generateMap(){
-	var SIZE = 3;
-	var BORDER_CHANCE = .3;
+function generateMap(SIZE, BORDER_CHANCE){
 
 	var map = new Array(SIZE);
 	
@@ -54,6 +48,18 @@ function generateMap(){
 			}
 		}
 	}
+	
+	map.match = function(i, j, k) {
+		if (k=='top') {
+			return map[i][j-1] && map[i][j-1]['bottom']
+		} else if (k=='bottom') {
+			return map[i][j+1] && map[i][j+1]['top']
+		} else if (k=='left') {
+			return map[i-1] && map[i-1][j]['right']
+		} else if (k=='right') {
+			return map[i+1] && map[i+1][j]['left']
+		}
+	};
 
 	return map;
 }
