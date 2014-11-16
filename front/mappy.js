@@ -1,7 +1,3 @@
-
-console.log(generateMap(20,0.1,0.05, 2));
-//3rd arg = how likey it is to have a 1 when neighbor is a 1
-//4th arg = how many times to add new borders
 function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 
 	var map = new Array(SIZE);
