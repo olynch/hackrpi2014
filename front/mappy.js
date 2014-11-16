@@ -95,6 +95,17 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 			}
 		}
 	}
+
+	var starting = false;
+	while(!starting){
+		var rr = Math.floor(Math.random()*SIZE);
+		var rc = Math.floor(Math.random()*SIZE);
+		if(map[rr][rc] == 1){
+			starting = true;
+			map.spawn = {row:rr,col:rc};
+		}
+	}
+
 	return map;
 }
 
