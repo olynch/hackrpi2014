@@ -61,7 +61,6 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 				if(map[row][col] != -1){
 					cmap[row][col] = map[row][col];
 					var keys = Object.keys(OFFSETS);
-					console.log(keys);
 					for(var k = 0; k < 4; k++){
 						var re = row + OFFSETS[keys[k]].row;
 						var ce = col + OFFSETS[keys[k]].col;
@@ -79,32 +78,32 @@ function generateMap(SIZE, BORDER_CHANCE, NEIGHBOR_BORDER_CHANCE, NUM_PASSES){
 
 
 
-	// for(var row = 0; row < SIZE; row++){
-	// 	for(var col = 0; col < SIZE; col++){
-	// 		//make block, set borders on outside edges
-	// 		map[row][col] = Math.random()<BORDER_CHANCE?0:1		
-	// 	}
-	// }
+	for(var row = 0; row < SIZE; row++){
+		for(var col = 0; col < SIZE; col++){
+			//make block, set borders on outside edges
+			map[row][col] = Math.random()<BORDER_CHANCE?0:map[row][col];		
+		}
+	}
 
-	// for(var pass = 0; pass < NUM_PASSES; pass++){
-	// 	for(var row = 0; row < SIZE; row++){
+	for(var pass = 0; pass < NUM_PASSES; pass++){
+		for(var row = 0; row < SIZE; row++){
 
-	// 		for(var col = 0; col < SIZE; col++){
-	// 			var p = 0;
-	// 			for(var key in OFFSETS){
-	// 				var nr = row + OFFSETS[key].row;
-	// 				var nc = row + OFFSETS[key].col;
-	// 				if(nr >= 0 && nr < SIZE && nc >= 0 && nc < SIZE){
-	// 					p += NEIGHBOR_BORDER_CHANCE;
-	// 				}
-	// 			}
-	// 			if(Math.random() < p){
-	// 				map[row][col] = 0;
-	// 			}
+			for(var col = 0; col < SIZE; col++){
+				var p = 0;
+				for(var key in OFFSETS){
+					var nr = row + OFFSETS[key].row;
+					var nc = row + OFFSETS[key].col;
+					if(nr >= 0 && nr < SIZE && nc >= 0 && nc < SIZE){
+						p += NEIGHBOR_BORDER_CHANCE;
+					}
+				}
+				if(Math.random() < p){
+					map[row][col] = 0;
+				}
 
-	// 		}
-	// 	}
-	// }
+			}
+		}
+	}
 
 
 
