@@ -28,13 +28,14 @@ Game = {
 			for (var j=0; j<SIZE; j++)
 					Crafty.e(walls[i][j]?'Chunk':'Wall')
 						.at(i,j)
+						.num(walls[i][j])
 						.color(walls[i][j]?COLORS[walls[i][j]-1]:'rgb(0,0,0)');
 		var s;
 		while(true){
 			s = [Math.floor(Math.random()*SIZE), Math.floor(Math.random()*SIZE)];
 			if(walls[s[0]]&&(walls[s[0]][s[1]]!==null))break
 		}
-		Crafty.e('PlayerCharacter').at(s[0],s[1]);
+		Crafty.e('PlayerCharacter').at(s[0],s[1]).setChunk(s[0],s[1]);
 		UpdatePeriod();
 	}
 };
@@ -67,13 +68,18 @@ Crafty.c('Actor', {
 Crafty.c('Chunk', {
   init: function() {
 	this.requires('Actor, Color')
+  },
+  num: function(i) {
+	this.chunk=i;
+	return this
   }
 });
 
 Crafty.c('Wall', {
   init: function() {
-    this.requires('Actor, Solid, Color');
+    this.requires('Actor, Color');
   },
+  num: function(){return this}
 });
 
 Crafty.c('PlayerCharacter', {
@@ -83,7 +89,10 @@ Crafty.c('PlayerCharacter', {
     } else {
       this.attr({ x: x * Game.tile, y: y * Game.tile });
     }
-	return this;
+	return this
+  },
+  setChunk: function(x, y) {
+  	this.chunk = walls[x][y]
   },
   init: function() {
     this.requires('2D, Canvas, Fourway, HTML, Collision')
@@ -91,10 +100,22 @@ Crafty.c('PlayerCharacter', {
       .fourway(4)
 	  .stopOnSolids()
 	  .replace('<div id="player"></div>');
+	  var t = this;
+	  this.ticker = setTimeout(function(){t.checkChunks()},400);
+  },
+  checkChunks: function() {
+	  var t = this;
+	  this.ticker = setTimeout(function(){t.checkChunks()},400);
+	  var newChunk = walls[Math.floor(this.x/Game.tile)][Math.floor(this.y/Game.tile)];
+	  if (newChunk==0 || (newChunk === this.chunk)) {return this}
+	  this.chunk = newChunk;
+	  Inform(chunk);
+	  UpdatePeriod();
+	  return this
   },
   stopOnSolids: function() {
-     this.onHit('Solid', this.stopMovement);
-     return this;
+     this.onHit('Wall', this.stopMovement);
+     return this
   },
   stopMovement: function() {
   	this._speed = 0;
@@ -104,6 +125,7 @@ Crafty.c('PlayerCharacter', {
   	}
   },
 });
+
 
 function Period(){return 0.75}
 function UpdatePeriod(){document.getElementById('rate').innerHTML="#player{-webkit-animation:pulsate "+String(Period())+"s ease-out}"}
