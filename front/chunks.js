@@ -1,4 +1,4 @@
-var apiKey = 'XUEYGQJA64K7UHRZZ',
+var apiKey = 'CKRIHPARQ1ZSLUGQ7',
 	trackID,
 	trackURL = 'audio/hbfs.mp3',
 	remixer,
@@ -51,7 +51,7 @@ function init() {
       songs.forEach(function(song) {
         // Avoid songs with no tracks
         if (song.tracks.length != 0) {
-          var htmlString = '<button class="p n enSong" onclick="LOADER.open();startGame()">' + song.artist_name + ' - ' + song.title + '</button>';
+          var htmlString = '<button class="p n enSong">' + song.artist_name + ' - ' + song.title + '</button>';
           $(htmlString).data({'enID': song.tracks[0].id, 'enTitle': song.title}).appendTo('#enSongs');
         }
       });
@@ -61,6 +61,7 @@ function init() {
         trackID = $(this).data('enID');
         $("#info").text('Selected ' +  $(this).data('enTitle'));
 		$('#start-remix').removeAttr('disabled');
+		LOADER.open();startGame()
       });
 
     });
@@ -76,6 +77,7 @@ function startGame() {
     context = new contextFunction();
     remixer = createJRemixer(context, $, apiKey);
     player = remixer.getPlayer();
+	debugger;
     remixer.remixTrackById(trackID, trackURL, function(t, percent) {
       track = t;
 
