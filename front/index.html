@@ -249,6 +249,11 @@ button:active,.btn:hover {
 	border: 1px solid rgb(40, 94, 142);
 	background-color: rgb(48, 113, 169);
 }
+.p.n {
+	display:block;
+	margin:20px auto;
+	text-align:center;
+}
   </style>
   <script>
 window.addEventListener('load',init);
@@ -261,12 +266,12 @@ window.addEventListener('load',init);
   	<button class="btn">
   		<div style="margin:20px auto;">Upload audio file or drag file here</div>
 	</button>
-	<div id="select-track">
-		<input type="text" value="Artist - Song Title" id="searchInput" size="30" style="font-size:12pt;"/>
+	<div id="interface" style="display:none">
+		<div id="select-track">
+			<input type="text" value="Artist - Song Title" id="searchInput" size="30" style="font-size:12pt;"/>
+		</div>
+		<div id="enSongs"></div>
 	</div>
-	<div id="enSongs"></div>
-	<br>
-  	<div id='start' style='display:none' onclick='LOADER.open();startGame()'><button class='.p'>Start</button></div>
   </div>
   <script>
   (function idrop(){
@@ -309,7 +314,7 @@ window.addEventListener('load',init);
   		var file=files[0],
   			url = window.URL.createObjectURL(file);
 		window.trackURL=url;
-		document.getElementById('start').style.display='inline-block';
+		document.getElementById('interface').style.display='block';
 		document.querySelector('.btn').style.display='none';
   	}
   })();

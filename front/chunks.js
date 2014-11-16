@@ -1,13 +1,12 @@
-var apiKey = 'XUEYGQJA64K7UHRZZ';
-var trackID;
-var trackURL = 'audio/hbfs.mp3'
-
-var remixer;
-var player;
-var track;
-var remixed;
-var playbackIndex = -1;
-var context;
+var apiKey = 'XUEYGQJA64K7UHRZZ',
+	trackID,
+	trackURL = 'audio/hbfs.mp3',
+	remixer,
+	player,
+	track,
+	remixed,
+	playbackIndex = -1,
+	context;
 
 function afterPlay() {
   if (player.oldSectionIndex !== player.newSectionIndex) {
@@ -41,7 +40,8 @@ function init() {
 
   // Set up the search function
   var enReq = null;
-  $('#searchInput').keyup(function() {
+  $('#searchInput').keyup(function(e) {
+	if (e.which!==13) {return}
     var searchString = $('#searchInput').val();
     if (enReq) { enReq.abort(); }
     var url = 'http://developer.echonest.com/api/v4/song/search?format=json&results=5&bucket=id:7digital-US&bucket=tracks'
@@ -51,15 +51,15 @@ function init() {
       songs.forEach(function(song) {
         // Avoid songs with no tracks
         if (song.tracks.length != 0) {
-          var htmlString = '<p class="enSong">' + song.artist_name + ' - ' + song.title + '</p>';
+          var htmlString = '<button class="p n enSong" onclick="LOADER.open();startGame()">' + song.artist_name + ' - ' + song.title + '</button>';
           $(htmlString).data({'enID': song.tracks[0].id, 'enTitle': song.title}).appendTo('#enSongs');
         }
       });
 
       // Set up the click function
-      $("#start").click(function() {
-        trackID = $(".enSong").data('enID');
-        $("#info").text('Selected ' +  $(".enSong").data('enTitle'));
+      $(".enSong").click(function() {
+        trackID = $(this).data('enID');
+        $("#info").text('Selected ' +  $(this).data('enTitle'));
 		$('#start-remix').removeAttr('disabled');
       });
 
