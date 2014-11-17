@@ -260,7 +260,7 @@ button:active,.btn:hover {
 }
 @-webkit-keyframes pulses {
     0% {opacity: 1.0;}
-	10% {opacity: 0.6;}
+	10% {opacity: 0.3;}
     100% {opacity: 1.0;}
 }
 #top {
@@ -304,9 +304,12 @@ window.addEventListener('load',init);
   <div id='info'> </div>
   <input type=file class='dropfile' style="display:none" onchange="upload(this.files)"/>
   <div id='super' style="margin:0 auto;text-align:center">
-  	<button class="btn">
-  		<div style="margin:20px auto;">Upload audio file or drag file here</div>
-	</button>
+  	<div id='start'>
+		<button class="btn">
+  			<div style="margin:20px auto;">Upload audio file or drag file here</div>
+		</button>
+		<br>Or<br><button id="defaultSong" class="p">Select default song (Daft Punk - Harder Better Faster Stronger)</button>
+	</div>
 	<div id="interface" style="display:none">
 		<div id="select-track">
 			<input type="text" value="Artist - Song Title" id="searchInput" size="30" style="font-size:12pt;"/>
@@ -356,8 +359,16 @@ window.addEventListener('load',init);
   			url = window.URL.createObjectURL(file);
 		window.trackURL=url;
 		document.getElementById('interface').style.display='block';
-		document.querySelector('.btn').style.display='none';
+		document.getElementById('start').style.display='none';
   	}
+  })();
+  (function defaultSong(){
+	  document.getElementById('defaultSong').addEventListener('click',function(){
+		window.trackURL='hbfs.mp3';
+		window.trackID = "TRFQXII134239CCD9F";
+		document.getElementById('start').style.display='none';
+		LOADER.open();startGame();
+	  });
   })();
   </script>
 </body>
